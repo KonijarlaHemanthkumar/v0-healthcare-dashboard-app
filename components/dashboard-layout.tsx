@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator"
 import { ChatbotWidget } from "@/components/chatbot-widget"
 import { WorkflowLocationButton } from "@/components/workflow-location-button"
 
-export default function DashboardLayout({ children, title }: { children: React.ReactNode; title?: string }) {
+export function DashboardLayout({ children, title }: { children: React.ReactNode; title?: string }) {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -27,3 +27,5 @@ export default function DashboardLayout({ children, title }: { children: React.R
     </SidebarProvider>
   )
 }
+
+export default DashboardLayout

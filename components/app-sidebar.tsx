@@ -45,20 +45,6 @@ import {
 } from "@/components/ui/collapsible"
 
 
-const languages = [
-  { code: "en", label: "English", flag: "EN" },
-  { code: "hi", label: "Hindi", flag: "HI" },
-  { code: "es", label: "Spanish", flag: "ES" },
-  { code: "fr", label: "French", flag: "FR" },
-  { code: "de", label: "German", flag: "DE" },
-  { code: "zh", label: "Chinese", flag: "ZH" },
-  { code: "ar", label: "Arabic", flag: "AR" },
-  { code: "pt", label: "Portuguese", flag: "PT" },
-  { code: "ja", label: "Japanese", flag: "JA" },
-  { code: "bn", label: "Bengali", flag: "BN" },
-  { code: "te", label: "Telugu", flag: "TE" },
-]
-
 const navItems = [
   { title: "Home", href: "/", icon: Home },
   { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
