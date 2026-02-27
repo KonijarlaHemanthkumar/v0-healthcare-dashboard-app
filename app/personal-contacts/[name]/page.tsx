@@ -1,7 +1,7 @@
 "use client"
 
 import { use } from "react"
-import { Phone, Mail, MapPin, Heart, Calendar, MessageCircle, Video } from "lucide-react"
+import { Phone, Mail, MapPin, Heart, Calendar, MessageCircle, Video, Home } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -14,6 +14,13 @@ const contactsData: Record<string, {
   phone: string
   email: string
   location: string
+  address: {
+    street: string
+    city: string
+    state: string
+    pincode: string
+    country: string
+  }
   bloodGroup: string
   avatar: string
   color: string
@@ -26,6 +33,13 @@ const contactsData: Record<string, {
     phone: "+91 98765 43210",
     email: "kavya@email.com",
     location: "Hyderabad, India",
+    address: {
+      street: "Plot 12, Road No. 5, Jubilee Hills",
+      city: "Hyderabad",
+      state: "Telangana",
+      pincode: "500033",
+      country: "India",
+    },
     bloodGroup: "B+",
     avatar: "K",
     color: "#E8567F",
@@ -38,6 +52,13 @@ const contactsData: Record<string, {
     phone: "+91 91234 56789",
     email: "hema@email.com",
     location: "Hyderabad, India",
+    address: {
+      street: "Flat 301, Srinivasa Apartments, Banjara Hills",
+      city: "Hyderabad",
+      state: "Telangana",
+      pincode: "500034",
+      country: "India",
+    },
     bloodGroup: "O+",
     avatar: "H",
     color: "#6366F1",
@@ -50,6 +71,13 @@ const contactsData: Record<string, {
     phone: "+91 99887 76655",
     email: "vijay@email.com",
     location: "Bangalore, India",
+    address: {
+      street: "No. 42, 2nd Cross, Koramangala 4th Block",
+      city: "Bangalore",
+      state: "Karnataka",
+      pincode: "560034",
+      country: "India",
+    },
     bloodGroup: "A+",
     avatar: "V",
     color: "#0EA5E9",
@@ -62,6 +90,13 @@ const contactsData: Record<string, {
     phone: "+91 98001 12233",
     email: "indrika@email.com",
     location: "Visakhapatnam, India",
+    address: {
+      street: "Door No. 8-3-167, MVP Colony",
+      city: "Visakhapatnam",
+      state: "Andhra Pradesh",
+      pincode: "530017",
+      country: "India",
+    },
     bloodGroup: "AB+",
     avatar: "I",
     color: "#14B8A6",
@@ -184,6 +219,40 @@ export default function PersonalContactPage({ params }: { params: Promise<{ name
             </CardContent>
           </Card>
         </div>
+
+        {/* Full Address Card */}
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Home className="size-4 text-primary" />
+              Address
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="rounded-lg border border-border p-3">
+                <p className="text-xs text-muted-foreground">Street</p>
+                <p className="mt-0.5 text-sm font-medium text-foreground">{contact.address.street}</p>
+              </div>
+              <div className="rounded-lg border border-border p-3">
+                <p className="text-xs text-muted-foreground">City</p>
+                <p className="mt-0.5 text-sm font-medium text-foreground">{contact.address.city}</p>
+              </div>
+              <div className="rounded-lg border border-border p-3">
+                <p className="text-xs text-muted-foreground">State</p>
+                <p className="mt-0.5 text-sm font-medium text-foreground">{contact.address.state}</p>
+              </div>
+              <div className="rounded-lg border border-border p-3">
+                <p className="text-xs text-muted-foreground">Pin Code</p>
+                <p className="mt-0.5 text-sm font-medium text-foreground">{contact.address.pincode}</p>
+              </div>
+              <div className="rounded-lg border border-border p-3">
+                <p className="text-xs text-muted-foreground">Country</p>
+                <p className="mt-0.5 text-sm font-medium text-foreground">{contact.address.country}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Recent Activity */}
         <Card>

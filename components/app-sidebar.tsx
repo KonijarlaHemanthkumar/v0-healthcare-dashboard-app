@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -14,12 +13,14 @@ import {
   AlertTriangle,
   LogIn,
   Activity,
-  Globe,
-  Check,
   Watch,
   ChevronRight,
   Users,
   User,
+  Settings,
+  Monitor,
+  Globe,
+  BellRing,
 } from "lucide-react"
 import {
   Sidebar,
@@ -42,14 +43,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 
 const languages = [
   { code: "en", label: "English", flag: "EN" },
@@ -95,9 +89,6 @@ const personalContacts = [
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const [selectedLang, setSelectedLang] = useState("en")
-
-  const currentLang = languages.find((l) => l.code === selectedLang) || languages[0]
 
   return (
     <Sidebar collapsible="icon">
@@ -198,6 +189,50 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               </Collapsible>
 
+              {/* Settings */}
+              <Collapsible asChild className="group/settings">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip="Settings"
+                      isActive={pathname.startsWith("/settings")}
+                    >
+                      <Settings className="size-4" />
+                      <span>Settings</span>
+                      <ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/settings:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild isActive={pathname === "/settings/display"}>
+                          <Link href="/settings/display">
+                            <Monitor className="size-3" />
+                            <span>Display Settings</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild isActive={pathname === "/settings/languages"}>
+                          <Link href="/settings/languages">
+                            <Globe className="size-3" />
+                            <span>Languages</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild isActive={pathname === "/settings/notifications"}>
+                          <Link href="/settings/notifications">
+                            <BellRing className="size-3" />
+                            <span>Notification Sounds</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -205,42 +240,6 @@ export function AppSidebar() {
       <SidebarSeparator />
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton tooltip="Language">
-                  <Globe className="size-4" />
-                  <span className="flex items-center gap-2">
-                    <span className="inline-flex size-5 items-center justify-center rounded bg-sidebar-accent text-[10px] font-bold text-sidebar-accent-foreground">
-                      {currentLang.flag}
-                    </span>
-                    {currentLang.label}
-                  </span>
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent side="right" align="end" className="w-48">
-                <DropdownMenuLabel>Select Language</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {languages.map((lang) => (
-                  <DropdownMenuItem
-                    key={lang.code}
-                    onClick={() => setSelectedLang(lang.code)}
-                    className="flex items-center justify-between"
-                  >
-                    <span className="flex items-center gap-2">
-                      <span className="inline-flex size-5 items-center justify-center rounded bg-muted text-[10px] font-bold text-muted-foreground">
-                        {lang.flag}
-                      </span>
-                      {lang.label}
-                    </span>
-                    {selectedLang === lang.code && (
-                      <Check className="size-4 text-primary" />
-                    )}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild isActive={pathname === "/login"} tooltip="Login">
               <Link href="/login">

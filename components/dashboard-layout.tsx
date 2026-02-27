@@ -3,8 +3,10 @@
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { Separator } from "@/components/ui/separator"
+import { ChatbotWidget } from "@/components/chatbot-widget"
+import { WorkflowLocationButton } from "@/components/workflow-location-button"
 
-export function DashboardLayout({ children, title }: { children: React.ReactNode; title?: string }) {
+export default function DashboardLayout({ children, title }: { children: React.ReactNode; title?: string }) {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -20,6 +22,8 @@ export function DashboardLayout({ children, title }: { children: React.ReactNode
           {children}
         </div>
       </SidebarInset>
+      <ChatbotWidget />
+      <WorkflowLocationButton />
     </SidebarProvider>
   )
 }
