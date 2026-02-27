@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -13,6 +14,8 @@ import {
   AlertTriangle,
   LogIn,
   Activity,
+  Globe,
+  Check,
 } from "lucide-react"
 import {
   Sidebar,
@@ -27,6 +30,27 @@ import {
   SidebarFooter,
   SidebarSeparator,
 } from "@/components/ui/sidebar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+const languages = [
+  { code: "en", label: "English", flag: "EN" },
+  { code: "hi", label: "Hindi", flag: "HI" },
+  { code: "es", label: "Spanish", flag: "ES" },
+  { code: "fr", label: "French", flag: "FR" },
+  { code: "de", label: "German", flag: "DE" },
+  { code: "zh", label: "Chinese", flag: "ZH" },
+  { code: "ar", label: "Arabic", flag: "AR" },
+  { code: "pt", label: "Portuguese", flag: "PT" },
+  { code: "ja", label: "Japanese", flag: "JA" },
+  { code: "bn", label: "Bengali", flag: "BN" },
+]
 
 const navItems = [
   { title: "Home", href: "/", icon: Home },
@@ -41,6 +65,9 @@ const navItems = [
 
 export function AppSidebar() {
   const pathname = usePathname()
+  const [selectedLang, setSelectedLang] = useState("en")
+
+  const currentLang = languages.find((l) => l.code === selectedLang) || languages[0]
 
   return (
     <Sidebar collapsible="icon">
@@ -82,6 +109,42 @@ export function AppSidebar() {
       <SidebarSeparator />
       <SidebarFooter>
         <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton tooltip="Language">
+                  <Globe className="size-4" />
+                  <span className="flex items-center gap-2">
+                    <span className="inline-flex size-5 items-center justify-center rounded bg-sidebar-accent text-[10px] font-bold text-sidebar-accent-foreground">
+                      {currentLang.flag}
+                    </span>
+                    {currentLang.label}
+                  </span>
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent side="right" align="end" className="w-48">
+                <DropdownMenuLabel>Select Language</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => setSelectedLang(lang.code)}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="inline-flex size-5 items-center justify-center rounded bg-muted text-[10px] font-bold text-muted-foreground">
+                        {lang.flag}
+                      </span>
+                      {lang.label}
+                    </span>
+                    {selectedLang === lang.code && (
+                      <Check className="size-4 text-primary" />
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild isActive={pathname === "/login"} tooltip="Login">
               <Link href="/login">
