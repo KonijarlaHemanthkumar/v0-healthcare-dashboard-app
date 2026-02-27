@@ -16,6 +16,10 @@ import {
   Activity,
   Globe,
   Check,
+  Watch,
+  ChevronRight,
+  Users,
+  User,
 } from "lucide-react"
 import {
   Sidebar,
@@ -29,7 +33,15 @@ import {
   SidebarMenuItem,
   SidebarFooter,
   SidebarSeparator,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,6 +62,7 @@ const languages = [
   { code: "pt", label: "Portuguese", flag: "PT" },
   { code: "ja", label: "Japanese", flag: "JA" },
   { code: "bn", label: "Bengali", flag: "BN" },
+  { code: "te", label: "Telugu", flag: "TE" },
 ]
 
 const navItems = [
@@ -61,6 +74,23 @@ const navItems = [
   { title: "Medical Store", href: "/medical-store", icon: ShoppingBag },
   { title: "Reports", href: "/reports", icon: FileBarChart },
   { title: "Emergency Alerts", href: "/emergency-alerts", icon: AlertTriangle },
+]
+
+const watchBrands = [
+  { name: "Firebolt", href: "/watch-brand/firebolt" },
+  { name: "Noise", href: "/watch-brand/noise" },
+  { name: "Apple", href: "/watch-brand/apple" },
+  { name: "Samsung", href: "/watch-brand/samsung" },
+  { name: "OnePlus", href: "/watch-brand/oneplus" },
+  { name: "Boat", href: "/watch-brand/boat" },
+  { name: "Casio", href: "/watch-brand/casio" },
+]
+
+const personalContacts = [
+  { name: "Kavya", href: "/personal-contacts/kavya" },
+  { name: "Hema", href: "/personal-contacts/hema" },
+  { name: "Vijay", href: "/personal-contacts/vijay" },
+  { name: "Indrika", href: "/personal-contacts/indrika" },
 ]
 
 export function AppSidebar() {
@@ -102,6 +132,72 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+
+              {/* Watch Brand */}
+              <Collapsible asChild className="group/watchbrand">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip="Watch Brand"
+                      isActive={pathname.startsWith("/watch-brand")}
+                    >
+                      <Watch className="size-4" />
+                      <span>Watch Brand</span>
+                      <ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/watchbrand:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {watchBrands.map((brand) => (
+                        <SidebarMenuSubItem key={brand.name}>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={pathname === brand.href}
+                          >
+                            <Link href={brand.href}>
+                              <span>{brand.name}</span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+
+              {/* Personal Contacts */}
+              <Collapsible asChild className="group/contacts">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip="Personal Contacts"
+                      isActive={pathname.startsWith("/personal-contacts")}
+                    >
+                      <Users className="size-4" />
+                      <span>Personal Contacts</span>
+                      <ChevronRight className="ml-auto size-4 transition-transform duration-200 group-data-[state=open]/contacts:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {personalContacts.map((contact) => (
+                        <SidebarMenuSubItem key={contact.name}>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={pathname === contact.href}
+                          >
+                            <Link href={contact.href}>
+                              <User className="size-3" />
+                              <span>{contact.name}</span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
