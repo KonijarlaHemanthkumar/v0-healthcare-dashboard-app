@@ -22,6 +22,7 @@ import {
   Globe,
   BellRing,
   UserPlus,
+  Wallet,
 } from "lucide-react"
 import {
   Sidebar,
@@ -220,6 +221,14 @@ export function AppSidebar() {
                           <Link href="/settings/create-account">
                             <UserPlus className="size-3" />
                             <span>Create Account</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild isActive={pathname === "/settings/payments"}>
+                          <Link href="/settings/payments">
+                            <Wallet className="size-3" />
+                            <span>GPay & PhonePe</span>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
