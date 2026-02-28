@@ -97,8 +97,8 @@ export default function LoginPage() {
 
             <p className="text-center text-sm text-muted-foreground">
               {"Don't have an account? "}
-              <Link href="/" className="font-medium text-primary hover:underline">
-                Contact Admin
+              <Link href="/settings/create-account" className="font-medium text-primary hover:underline">
+                Create Account
               </Link>
             </p>
           </CardContent>

@@ -21,6 +21,7 @@ import {
   Monitor,
   Globe,
   BellRing,
+  UserPlus,
 } from "lucide-react"
 import {
   Sidebar,
@@ -211,6 +212,14 @@ export function AppSidebar() {
                           <Link href="/settings/notifications">
                             <BellRing className="size-3" />
                             <span>Notification Sounds</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild isActive={pathname === "/settings/create-account"}>
+                          <Link href="/settings/create-account">
+                            <UserPlus className="size-3" />
+                            <span>Create Account</span>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
